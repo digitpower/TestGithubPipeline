@@ -41,5 +41,5 @@ jobs:
         shell: bash
         run: |
           cd TestGithubPipeline
-          ls -ltr
+          ls -latr Releases
           #aws s3 cp Releases s3://$BUCKET_NAME --recursive ###remove echo
