@@ -35,33 +35,11 @@ jobs:
 
       - name: dotnet publish
         run: |
-          #   $env:nextgen_dlls = "nextgen_dlls"
-          #   echo $env:nextgen_dlls
           dotnet publish -r win-x64 --self-contained=true --configuration staging --verbosity m TestGithubPipeline.sln  ###remove echo
-          #dotnet publish -r win-x64 --self-contained=true --configuration staging --verbosity m --output $env:nextgen_dlls TestGithubPipeline.sln  ###remove echo
-          #   dir
-          #   dir $env:nextgen_dlls
 
-
-      #Here we have this:           
-      #  D:\a\nextgen\nextgen\nextgen_dlls
-      # Could not find a part of the path 'D:\a\nextgen\nextgen\nextgen_dlls'.
-    #   - name: nuget pack
-    #     run: |
-    #       $env:nuget_out_dir = "out_dir"
-    #       nuget.exe pack NextGen.WelcomeScreen/deploys/staging_dotnet.nuspec -Version 1.0.0 -Properties Configuration=staging -OutputDirectory $env:nuget_out_dir -BasePath $env:nuget_out_dir
-    #       dir
-    #       dir $env:nuget_out_dir
-    #   - name: Squirrel releasify
-    #     run: |
-    #       $env:final_dir = "final_dir"
-    #       $env:nuget_out_dir = "out_dir"
-    #       cd $env:nuget_out_dir
-    #       Squirrel.exe --releasify AutoScriptOneDevelop.1.0.0.nupkg --releaseDir $env:final_dir
-    #       cd $env:final_dir
-    #       dir
-
-    #   - name: Set tmp directory for squirrel-migration
-    #     shell: bash
-    #     run:  |
-    #      echo "SQUIRREL_TEMP=$(mktemp -d)" >> $GITHUB_ENV
+      - name: Upload build
+        shell: bash
+        run: |
+          cd TestGithubPipeline
+          ls -ltr
+          #aws s3 cp Releases s3://$BUCKET_NAME --recursive ###remove echo
