@@ -5,6 +5,7 @@
     <TargetFramework>net7.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <Configurations>Debug;Release;staging</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +20,10 @@
 
     <Message Text="####################1" Importance="high" />
     <Message Text="$(OutDir)" Importance="high" />
+    <Exec Command="nuget pack deploys/staging.nuspec -Version %(myAssemblyInfo.Version) -Properties Configuration=staging -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Message Text="####################2" Importance="high" />
+    <Exec Command="%userprofile%\.nuget\packages\clowd.squirrel\2.9.42\tools\Squirrel.exe releasify --allowUnaware --package &quot;$(OutDir)AutoScriptOneDevelop.1.0.0.nupkg&quot;" />
+    <Message Text="####################3" Importance="high" />
 	</Target>
 
 </Project>
