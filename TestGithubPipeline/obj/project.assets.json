@@ -1,11 +1,106 @@
 {
   "version": 3,
   "targets": {
-    "net7.0-windows7.0": {}
+    "net7.0-windows7.0": {
+      "Clowd.Squirrel/2.9.42": {
+        "type": "package",
+        "dependencies": {
+          "SharpCompress": "0.31.0"
+        },
+        "compile": {
+          "lib/net6.0/SquirrelLib.dll": {
+            "related": ".deps.json;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/SquirrelLib.dll": {
+            "related": ".deps.json;.xml"
+          }
+        },
+        "build": {
+          "build/Clowd.Squirrel.props": {}
+        }
+      },
+      "SharpCompress/0.31.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0/SharpCompress.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0/SharpCompress.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Clowd.Squirrel/2.9.42": {
+      "sha512": "bM7h3tqoenZD+tmiV7pUnFdJ/o1oOrC21PaS8crMDRDOuGB4YqsgzlUKFD1g8X6z64IRBqzlUwEKzpsFyFc0mQ==",
+      "type": "package",
+      "path": "clowd.squirrel/2.9.42",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Clowd.Squirrel.props",
+        "clowd.squirrel.2.9.42.nupkg.sha512",
+        "clowd.squirrel.nuspec",
+        "images/Squirrel-Clowd-Logo.png",
+        "lib/net461/SquirrelLib.dll",
+        "lib/net461/SquirrelLib.xml",
+        "lib/net5.0/SquirrelLib.deps.json",
+        "lib/net5.0/SquirrelLib.dll",
+        "lib/net5.0/SquirrelLib.xml",
+        "lib/net6.0/SquirrelLib.deps.json",
+        "lib/net6.0/SquirrelLib.dll",
+        "lib/net6.0/SquirrelLib.xml",
+        "lib/netstandard2.0/SquirrelLib.deps.json",
+        "lib/netstandard2.0/SquirrelLib.dll",
+        "lib/netstandard2.0/SquirrelLib.xml",
+        "tools/7z.dll",
+        "tools/7z.exe",
+        "tools/Microsoft.Deployment.Resources.dll",
+        "tools/Microsoft.Deployment.WindowsInstaller.dll",
+        "tools/Setup.exe",
+        "tools/Squirrel.exe",
+        "tools/StubExecutable.exe",
+        "tools/Update.exe",
+        "tools/WixNetFxExtension.dll",
+        "tools/candle.exe",
+        "tools/candle.exe.config",
+        "tools/darice.cub",
+        "tools/light.exe",
+        "tools/light.exe.config",
+        "tools/nuget.exe",
+        "tools/rcedit.exe",
+        "tools/signtool.exe",
+        "tools/singlefilehost.exe",
+        "tools/template.wxs",
+        "tools/wconsole.dll",
+        "tools/winterop.dll",
+        "tools/wix.dll"
+      ]
+    },
+    "SharpCompress/0.31.0": {
+      "sha512": "wFf5N0ysnlKbG54beDDm4Z1uqM0EAKTupEkTxyG4EGVE1uZgTtohuBd2BhTHR2gNweJ6agxKbMFzmzk181qqjw==",
+      "type": "package",
+      "path": "sharpcompress/0.31.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net461/SharpCompress.dll",
+        "lib/net5.0/SharpCompress.dll",
+        "lib/netcoreapp3.1/SharpCompress.dll",
+        "lib/netstandard2.0/SharpCompress.dll",
+        "lib/netstandard2.1/SharpCompress.dll",
+        "sharpcompress.0.31.0.nupkg.sha512",
+        "sharpcompress.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net7.0-windows7.0": []
+    "net7.0-windows7.0": [
+      "Clowd.Squirrel >= 2.9.42"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\admin\\.nuget\\packages\\": {},
@@ -49,6 +144,12 @@
     "frameworks": {
       "net7.0-windows7.0": {
         "targetAlias": "net7.0-windows",
+        "dependencies": {
+          "Clowd.Squirrel": {
+            "target": "Package",
+            "version": "[2.9.42, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

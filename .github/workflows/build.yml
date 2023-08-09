@@ -1,0 +1,67 @@
+name: Staging squirrel deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  tagging:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+  deploy_desktop:
+    runs-on: windows-latest
+    #needs: tagging
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set environment for main branch
+        shell: bash
+        if: github.ref == 'refs/heads/main'
+        run: |
+          echo "BUCKET_NAME=autoscript-one-main" >> $GITHUB_ENV
+          echo "PROJECT_CONF=staging" >> $GITHUB_ENV
+
+      - name: Setup dotnet cli
+        uses: actions/setup-dotnet@v3
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.0.5
+
+      - name: Add devexpress nuget source
+        run: nuget sources Add -Name "DXFeed" -Source https://nuget.devexpress.com/3CbmZLhj9ssLWS6tJMxq3FPGyDdXXgCnKRbbRpE3uKj4nGjseW/api
+
+
+      - name: dotnet publish
+        run: |
+          #   $env:nextgen_dlls = "nextgen_dlls"
+          #   echo $env:nextgen_dlls
+          dotnet publish -r win-x64 --self-contained=true --configuration staging --verbosity m TestGithubPipeline.sln  ###remove echo
+          #dotnet publish -r win-x64 --self-contained=true --configuration staging --verbosity m --output $env:nextgen_dlls TestGithubPipeline.sln  ###remove echo
+          #   dir
+          #   dir $env:nextgen_dlls
+
+
+      #Here we have this:           
+      #  D:\a\nextgen\nextgen\nextgen_dlls
+      # Could not find a part of the path 'D:\a\nextgen\nextgen\nextgen_dlls'.
+    #   - name: nuget pack
+    #     run: |
+    #       $env:nuget_out_dir = "out_dir"
+    #       nuget.exe pack NextGen.WelcomeScreen/deploys/staging_dotnet.nuspec -Version 1.0.0 -Properties Configuration=staging -OutputDirectory $env:nuget_out_dir -BasePath $env:nuget_out_dir
+    #       dir
+    #       dir $env:nuget_out_dir
+    #   - name: Squirrel releasify
+    #     run: |
+    #       $env:final_dir = "final_dir"
+    #       $env:nuget_out_dir = "out_dir"
+    #       cd $env:nuget_out_dir
+    #       Squirrel.exe --releasify AutoScriptOneDevelop.1.0.0.nupkg --releaseDir $env:final_dir
+    #       cd $env:final_dir
+    #       dir
+
+    #   - name: Set tmp directory for squirrel-migration
+    #     shell: bash
+    #     run:  |
+    #      echo "SQUIRREL_TEMP=$(mktemp -d)" >> $GITHUB_ENV

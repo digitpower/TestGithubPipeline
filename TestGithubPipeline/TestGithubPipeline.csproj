@@ -7,4 +7,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Clowd.Squirrel" Version="2.9.42" />
+  </ItemGroup>
+
+	<Target Name="Staging" Condition=" '$(Configuration)' == 'staging'" AfterTargets="AfterBuild">
+		<Message Text="1" Importance="high" />
+		<GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+			<Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
+		</GetAssemblyIdentity>
+
+    <Message Text="####################1" Importance="high" />
+    <Message Text="$(OutDir)" Importance="high" />
+	</Target>
+
 </Project>

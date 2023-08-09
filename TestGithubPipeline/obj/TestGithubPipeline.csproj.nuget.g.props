@@ -13,4 +13,10 @@
     <SourceRoot Include="C:\Users\admin\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files\DevExpress 22.2\Components\Offline Packages\" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)clowd.squirrel\2.9.42\build\Clowd.Squirrel.props" Condition="Exists('$(NuGetPackageRoot)clowd.squirrel\2.9.42\build\Clowd.Squirrel.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgClowd_Squirrel Condition=" '$(PkgClowd_Squirrel)' == '' ">C:\Users\admin\.nuget\packages\clowd.squirrel\2.9.42</PkgClowd_Squirrel>
+  </PropertyGroup>
 </Project>
